@@ -115,6 +115,7 @@ class LFUCache(dict, CacheBase):
         dict.__setitem__(self, key, value)
         for key, _ in self.usage_counter.most_common(len(self) - self.maxsize):
             del self[key]
+        self.usage_counter[key] = 0
 
     def __delitem__(self, key):
         dict.__delitem__(self, key)
